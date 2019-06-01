@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20190417081637_Identity initial.cs" />
+    <Compile Remove="Migrations\20190417081637_Identity initial.Designer.cs" />
+    <Compile Remove="Migrations\20190424161935_UpdateIdentityConf.cs" />
+    <Compile Remove="Migrations\20190424161935_UpdateIdentityConf.Designer.cs" />
+    <Compile Remove="Migrations\20190425083512_UpdateIdentityConf.cs" />
+    <Compile Remove="Migrations\20190425083512_UpdateIdentityConf.Designer.cs" />
+    <Compile Remove="Migrations\20190426131031_AddUserRole.cs" />
+    <Compile Remove="Migrations\20190426131031_AddUserRole.Designer.cs" />
+    <Compile Remove="Migrations\20190426133508_AddUserRole.cs" />
+    <Compile Remove="Migrations\20190426133508_AddUserRole.Designer.cs" />
+    <Compile Remove="Migrations\20190426133736_AddUserRole.cs" />
+    <Compile Remove="Migrations\20190426133736_AddUserRole.Designer.cs" />
+    <Compile Remove="Migrations\20190426141947_UpdateUserRoleU.cs" />
+    <Compile Remove="Migrations\20190426141947_UpdateUserRoleU.Designer.cs" />
+    <Compile Remove="Migrations\20190430121431_UpdateRoleScheme.cs" />
+    <Compile Remove="Migrations\20190430121431_UpdateRoleScheme.Designer.cs" />
+    <Compile Remove="Migrations\20190503123903_Adding salted passwords.cs" />
+    <Compile Remove="Migrations\20190503123903_Adding salted passwords.Designer.cs" />
+    <Compile Remove="Migrations\20190503124656_Correcting password length.cs" />
+    <Compile Remove="Migrations\20190503124656_Correcting password length.Designer.cs" />
+    <Compile Remove="Migrations\20190510090833_Added tracking.cs" />
+    <Compile Remove="Migrations\20190510090833_Added tracking.Designer.cs" />
+    <Compile Remove="Migrations\20190513161354_clean entity names.cs" />
+    <Compile Remove="Migrations\20190513161354_clean entity names.Designer.cs" />
+    <Compile Remove="Migrations\20190513161949_clean entity names 2.cs" />
+    <Compile Remove="Migrations\20190513161949_clean entity names 2.Designer.cs" />
+    <Compile Remove="Migrations\20190513162841_Initial.cs" />
+    <Compile Remove="Migrations\20190513162841_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190513163150_Update IdentityRole.cs" />
+    <Compile Remove="Migrations\20190513163150_Update IdentityRole.Designer.cs" />
+    <Compile Remove="Migrations\20190520132114_reorganizing domain.cs" />
+    <Compile Remove="Migrations\20190520132114_reorganizing domain.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UMA.Domain.Identity\UMA.Domain.Identity.csproj" />
+    <ProjectReference Include="..\UMA.Persistence.Common\UMA.Persistence.Common.csproj" />
+  </ItemGroup>
+
+</Project>

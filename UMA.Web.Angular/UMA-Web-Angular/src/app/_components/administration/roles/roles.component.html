@@ -1,0 +1,25 @@
+<div>
+  <h3>Add role</h3>
+  <label>Role name :
+    <input #roleName />
+  </label>
+  <label>Role description :
+    <input #roleDescription  />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(roleName.value, roleDescription.value); roleName.value=''; roleDescription.value=''">
+    add
+  </button>
+</div>
+
+<div>
+    <h2>Roles</h2>
+    <ul class="roles">
+      <li *ngFor="let role of roles">
+        <a routerLink="../role/{{role.id}}">
+          <span class="badge">{{role.id}}</span> "{{role.name}}" ({{role.created}}) : <span>{{role.description}}</span>
+        </a>
+        <button class="delete" title="delete role" (click)="delete(role)">x</button>
+      </li>
+    </ul>
+  </div>

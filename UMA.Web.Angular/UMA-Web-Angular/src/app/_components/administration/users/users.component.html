@@ -1,0 +1,25 @@
+<div>
+  <h3>Add user</h3>
+  <label>User login :
+    <input #userLogin />
+  </label>
+  <label>User password :
+    <input #userPassword type="password" />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(userLogin.value, userPassword.value); userLogin.value=''; userPassword.value=''">
+    add
+  </button>
+</div>
+
+<div>
+  <h2>Users</h2>
+  <ul class="users">
+    <li *ngFor="let user of users">
+      <a routerLink="../user/{{user.id}}">
+        <span class="badge">{{user.id}}</span> {{user.login}}
+      </a>
+      <button class="delete" title="delete user" (click)="delete(user)">x</button>
+    </li>
+  </ul>
+</div>

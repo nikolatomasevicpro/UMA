@@ -1,0 +1,38 @@
+{
+  "appTitle": "UMA",
+  "apiUrl":"https://localhost:44380/api/",
+  "defaultLanguage": "fr",
+  "apiEndpoints":[
+    { "service":"authenticate", "endpoint":"authentication/authenticate", "type":"post" },
+    { "service":"register", "endpoint":"authentication/register", "type":"post" },
+
+    { "service":"getAllUsers", "endpoint":"identity/GetAllIdentities", "type":"get" },
+    { "service":"getUser", "endpoint":"identity/GetIdentity", "type":"post" },
+    { "service":"createUser", "endpoint":"identity/CreateIdentity", "type":"post" },
+    { "service":"updateUser", "endpoint":"identity/UpdateIdentity", "type":"post" },
+    { "service":"deleteUser", "endpoint":"identity/DeleteIdentity", "type":"post" },
+
+    { "service":"getAllRoles", "endpoint":"role/GetAllRoles", "type":"get" },
+    { "service":"getRole", "endpoint":"role/GetRole", "type":"post" },
+    { "service":"getRolesByIdentity", "endpoint":"role/GetRolesByIdentity", "type":"post" },
+    { "service":"createRole", "endpoint":"role/CreateRole", "type":"post" },
+    { "service":"updateRole", "endpoint":"role/UpdateRole", "type":"post" },
+    { "service":"deleteRole", "endpoint":"role/DeleteRole", "type":"post" },
+
+    { "service":"setRoles", "endpoint":"identityrole/SetRoles", "type":"post" }
+  ],
+  "policies":[
+    { "name": "admin", "roles": ["SU", "Admin"] }
+  ],
+  "notification":{
+    "defaultShowTimeout": 3000,
+    "defaultWarnTimeout": 4000,
+    "defaultSuccessTimeout": 3000,
+    "defaultErrorTimeout": 5000,
+    "defaultInfoTimeout": 4000
+  },
+  "navBarMenu":[
+    { "name":"Home", "route":"/home" },
+    { "name":"Admin", "route":"/admin/dashboard", "policies": ["Admin"] }
+  ]
+}

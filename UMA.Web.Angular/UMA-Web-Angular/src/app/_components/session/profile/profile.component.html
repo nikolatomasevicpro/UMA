@@ -1,0 +1,21 @@
+<div *ngIf="user" class="container">
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>{{user.username | uppercase}} Details</h2>
+      <div class="form-group">
+        <label [appGlobal]="'Profile_Login'">Login :</label>
+        <input [(ngModel)]="user.username" placeholder="name" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label [appGlobal]="'Profile_Language'">Language</label>
+        <select class="form-control" (change)="changeLanguage($event)">
+            <option value="" disabled>Choose your language</option>
+            <option *ngFor="let language of languages" [ngValue]="user.language">{{language}}</option>
+            </select>
+      </div>
+      <button (click)="save()" class="btn btn-primary">save</button>
+      <button (click)="goBack()" class="btn btn-secondary">go back</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div *ngIf="user">
+
+    <h2>{{user.login | uppercase}} Details</h2>
+    <div><span>Id : </span>{{user.id}}</div>
+    <div>
+      <label>Login :
+        <input [(ngModel)]="user.login" placeholder="login"/>
+      </label>
+    </div>
+    <div>
+      <ng-multiselect-dropdown
+        [placeholder]="selectionPlacehoder"
+        [data]="roles"
+        [(ngModel)]="selectedRoles"
+        [settings]="ddSettings"
+      ></ng-multiselect-dropdown>
+    </div>
+    <button (click)="save()">save</button>
+    <button (click)="goBack()">go back</button>
+  </div>
+
