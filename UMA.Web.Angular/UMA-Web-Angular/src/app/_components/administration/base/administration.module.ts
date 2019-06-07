@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { RoleComponent } from '../role/role.component';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { SharedModule } from '../../shared/base/shared.module';
+import { GlobalDirective } from 'src/app/_directives/global/global.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     CommonModule,
     AdministrationRoutingModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    SharedModule
   ]
 })
 export class AdministrationModule { }

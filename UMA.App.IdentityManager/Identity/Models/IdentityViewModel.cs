@@ -1,7 +1,6 @@
 ﻿using System;
 using UMA.App.Common.AutoMapper;
 using UMA.App.Common.MediatR;
-using UMA.Domain.Identity;
 
 namespace UMA.App.IdentityManager.Identity.Models
 {

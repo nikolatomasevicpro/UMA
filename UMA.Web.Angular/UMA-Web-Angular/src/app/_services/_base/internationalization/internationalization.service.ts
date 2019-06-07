@@ -1,35 +1,88 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Dictionary } from 'src/app/_models/internationalization/Dictionary';
 import dictionaryFile from '../../../_data/dictionary.json';
-import { NotificationService } from '../notification/notification.service';
 import { SessionService } from '../session/session.service.js';
 import { ConfigurationService } from '../config/configuration.service.js';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NotificationService } from '../notification/notification.service.js';
+import { Culture } from 'src/app/_models/internationalization/Culture.js';
 
 @Injectable({
   providedIn: 'root'
 })
-export class InternationalizationService {
-  languages: string[];
+export class InternationalizationService implements OnInit {
+  cultures: Culture[];
   dictionaries: Dictionary[] = dictionaryFile;
 
+  private languageSubject: BehaviorSubject<string> = new BehaviorSubject<string>(this.config.config.defaultLanguage);
+  public language: Observable<string> = this.languageSubject.asObservable();
+
   constructor(
-    private notif: NotificationService,
     private session: SessionService,
-    private config: ConfigurationService
+    private config: ConfigurationService,
+    private notif: NotificationService
   ) {
-    this.languages = this.dictionaries.map(e => e.language);
-   }
+    this.cultures = this.dictionaries.map(e => {
+      const culture = { name: e.language, nativeName: e.nativeName} as Culture;
+      return culture;
+    });
 
-   public get knownLanguages() {
-     return this.languages;
-   }
+    this.session.currentProfile.subscribe(profile => {
+      if (profile) {
+        this.switchLanguage(profile.locale);
+      } else {
+        this.switchLanguage(this.config.config.defaultLanguage);
+      }
+    });
+  }
 
-   public translate(key: string): string {
-     let lang = this.config.config.defaultLanguage;
-     if (this.session.user) {
-       lang = this.session.user.language || lang;
-     }
+  ngOnInit() {
+  }
 
-     return  this.dictionaries.find(e => e.language === lang).dictionary.find(e => e.key === key).value;
-   }
+  public switchLanguage(language: string) {
+    if (language) {
+      this.languageSubject.next(language);
+      this.notif.info(this.translate('Info_Language_Switch', [this.languageSubject.value]), 'International :');
+    }
+  }
+
+  public get knownLanguages() {
+    return this.cultures;
+  }
+
+  public translate(key: string, values?: string[]): string {
+    let result = '';
+    let lang = this.config.config.defaultLanguage;
+
+    if (!!this.languageSubject) {
+      lang = this.languageSubject.value || lang;
+    }
+
+    result = this.findTranslation(key, lang);
+    if (!result) {
+      result = this.findTranslation(key, this.config.config.neutralLanguage);
+    }
+
+    if (!!result && values && values.length > 0) {
+      for (let index = 0; index < values.length; index++) {
+        result = result.replace('{' + index + '}', values[index]);
+      }
+    }
+
+    return result;
+  }
+
+  private findTranslation(key: string, language: string) {
+    let result = '';
+
+    const lang = this.dictionaries.find(e => e.language === language);
+    if (lang) {
+      const pair = lang.dictionary.find(e => e.key === key);
+      if (pair) {
+        result = pair.value;
+      }
+    }
+
+    return result;
+  }
 }

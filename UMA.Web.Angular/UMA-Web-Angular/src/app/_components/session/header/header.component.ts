@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from 'src/app/_models/user';
-import { AuthenticationService } from 'src/app/_services/authentication/authentication.service';
+import { User } from 'src/app/_models/session/user';
 import { SessionService } from 'src/app/_services/_base/session/session.service';
 import { ConfigurationService } from 'src/app/_services/_base/config/configuration.service';
+import { NotificationService } from 'src/app/_services/_base/notification/notification.service';
+import { ConstPoliciesConf } from 'src/app/_models/config/consts/policies.const';
 
 @Component({
   selector: 'app-header',
@@ -17,11 +18,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
     private session: SessionService,
-    private conf: ConfigurationService
+    private conf: ConfigurationService,
+    private notif: NotificationService
     ) {
-      this.authenticationService.currentUser.subscribe(x => { this.currentUser = x; this.checkClaims(); });
+      this.session.currentUser.subscribe(x => {
+        this.currentUser = x;
+        this.checkClaims();
+        this.notif.info('Checked user credentials', 'Header :');
+      });
      }
 
   ngOnInit() {
@@ -29,12 +34,12 @@ export class HeaderComponent implements OnInit {
 
   private checkClaims() {
     if (this.currentUser && this.currentUser.roles) {
-    this.userisAdmin = this.session.hasPolicy(this.conf.consts.policies.admin);
+    this.userisAdmin = this.session.hasPolicy(ConstPoliciesConf.admin);
     }
   }
 
   logout() {
-    this.authenticationService.logout();
+    this.session.logout();
     this.router.navigate(['/login']);
   }
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/_services/authentication/authentication.service';
 import { SessionService } from 'src/app/_services/_base/session/session.service';
 import { MustMatch } from 'src/app/_helpers/validators/mustmatch.validator';
 import { first } from 'rxjs/operators';
@@ -22,7 +21,6 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService,
     private sessionService: SessionService,
     private notifications: NotificationService
   ) {
@@ -59,13 +57,13 @@ export class RegisterComponent implements OnInit {
     const login = this.f.userName.value;
     const password = this.f.password.value;
     this.loading = true;
-    this.authenticationService.register({ login, password})
+    this.sessionService.register({ login, password})
         .pipe(first())
         .subscribe(
             response => {
               if (response.result) {
                 this.notifications.success('User ' + login + ' successfully created', 'Register :');
-                this.authenticationService.login({ login, password})
+                this.sessionService.login({ login, password})
                 .subscribe(subResponse => {
                   if (this.sessionService.isAuthentified) {
                     this.router.navigate([this.returnUrl]);

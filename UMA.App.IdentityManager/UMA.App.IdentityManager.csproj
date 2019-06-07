@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UMA.App.Common\UMA.App.Common.csproj" />
-    <ProjectReference Include="..\UMA.Infrastructure\UMA.Infrastructure.csproj" />
     <ProjectReference Include="..\UMA.Persistence.Identity\UMA.Persistence.Identity.csproj" />
   </ItemGroup>
 

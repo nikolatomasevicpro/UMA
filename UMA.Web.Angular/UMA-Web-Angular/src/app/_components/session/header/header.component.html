@@ -1,8 +1,17 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
   <div class="nav navbar-nav">
       <a class="nav-item nav-link" routerLink="/" [appGlobal]="'Menu_Main_Home'">Home</a>
-      <a class="nav-item nav-link" *ngIf="userisAdmin" routerLink="/admin/dashboard" [appGlobal]="'Menu_Main_Admin'">Admin</a>
-  </div>
+      <ul class="navbar-nav ml-auto" *ngIf="userisAdmin">
+        <li ngbDropdown class="d-inline-block">
+          <a class="nav-item nav-link" id="adminMenu" ngbDropdownToggle [appGlobal]="'Menu_Main_Admin'">Admin</a>
+          <div ngbDropdownMenu aria-labelledby="adminMenu">
+            <button ngbDropdownItem routerLink="/admin/dashboard" [appGlobal]="'Menu_Admin_Dashboard'">Users</button>
+            <button ngbDropdownItem routerLink="/admin/users" [appGlobal]="'Menu_Admin_Users'">Users</button>
+            <button ngbDropdownItem routerLink="/admin/roles" [appGlobal]="'Menu_Admin_Roles'">Roles</button>
+          </div>
+        </li>
+      </ul>
+    </div>
 
   <ul class="navbar-nav ml-auto">
     <!-- <li class="nav-item">

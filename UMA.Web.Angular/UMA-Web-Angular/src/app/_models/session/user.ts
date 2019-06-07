@@ -5,5 +5,4 @@ export class User {
   expires: string;
   roles: string[];
   policies: string[];
-  language: string;
 }

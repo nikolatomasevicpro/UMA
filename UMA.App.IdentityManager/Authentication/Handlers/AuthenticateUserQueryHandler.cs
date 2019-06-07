@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using UMA.App.Common.Utility;
 using UMA.App.IdentityManager.Authentication.Models;
 using UMA.App.IdentityManager.Authentication.Queries;
-using UMA.Infrastructure.Crypto;
 using UMA.Persistence.Identity.Context;
 
 namespace UMA.App.IdentityManager.Authentication.Handlers
@@ -22,7 +22,9 @@ namespace UMA.App.IdentityManager.Authentication.Handlers
 
             try
             {
-                var identity = await _context.Identities.Include(x => x.IdentityRoles).ThenInclude(x => x.Role).FirstOrDefaultAsync(x => x.Login == request.Login && x.Password == PasswordEncrypter.Hash(request.Password, x.Salt, 256, 10000));
+                var identity = await _context.Identities
+                    .Include(x => x.IdentityRoles).ThenInclude(x => x.Role)
+                    .FirstOrDefaultAsync(x => x.Login.SameAs(request.Login) && x.Password.SameAs(request.Password, x.Salt));
 
                 if (identity != null && response.FillToken(identity))
                 {

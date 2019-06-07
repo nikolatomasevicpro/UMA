@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { ConfigurationService } from '../_services/_base/config/configuration.service';
 import { SessionService } from '../_services/_base/session/session.service';
+import { ConstPoliciesConf } from '../_models/config/consts/policies.const';
 
 @Injectable({ providedIn: 'root' })
 export class AdminGuard implements CanActivate {
@@ -13,7 +14,7 @@ export class AdminGuard implements CanActivate {
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this.session.hasPolicy(this.config.consts.policies.admin)) {
+        if (this.session.hasPolicy(ConstPoliciesConf.admin)) {
           // authorised so return true
           return true;
         }

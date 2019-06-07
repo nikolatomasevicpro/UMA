@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { JwtInterceptor } from '../_helpers/jwt.interceptor';
+import { JwtInterceptor } from '../_helpers/interceptors/jwt.interceptor';
 
 import { AppComponent } from './app-component/app.component';
 
@@ -22,6 +22,7 @@ import { ProfileComponent } from '../_components/session/profile/profile.compone
 import { HeaderComponent } from '../_components/session/header/header.component';
 import { FooterComponent } from '../_components/session/footer/footer.component';
 import { GlobalDirective } from '../_directives/global/global.directive';
+import { SharedModule } from '../_components/shared/base/shared.module';
 
 
 @NgModule({
@@ -33,8 +34,7 @@ import { GlobalDirective } from '../_directives/global/global.directive';
     RegisterComponent,
     ProfileComponent,
     HeaderComponent,
-    FooterComponent,
-    GlobalDirective
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,8 @@ import { GlobalDirective } from '../_directives/global/global.directive';
     AdministrationModule,
     ToastrModule.forRoot(),
     AngularFontAwesomeModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

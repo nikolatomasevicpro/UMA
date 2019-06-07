@@ -30,9 +30,13 @@ namespace UMA.Persistence.Identity.Context
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(IdentityDbContext).Assembly);
         }
 
+        #region Sets
+
         public DbSet<Domain.Identity.Identity> Identities { get; set; }
         public DbSet<IdentityRole> IdentityRoles { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        
+        #endregion
     }
 }

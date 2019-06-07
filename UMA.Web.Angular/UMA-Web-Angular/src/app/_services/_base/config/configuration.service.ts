@@ -2,7 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { ApiEndpointConf } from 'src/app/_models/config/api-endpoints';
 import { Config } from '../../../_models/config/config';
-import { ConstsConf } from 'src/app/_models/config/consts/consts';
 import { PolicyConf } from 'src/app/_models/config/policy';
 
 import configFile from '../../../_data/config.json';
@@ -12,7 +11,6 @@ import configFile from '../../../_data/config.json';
 })
 export class ConfigurationService implements OnInit {
   config: Config = configFile;
-  consts: ConstsConf = new ConstsConf();
 
   constructor() { }
 

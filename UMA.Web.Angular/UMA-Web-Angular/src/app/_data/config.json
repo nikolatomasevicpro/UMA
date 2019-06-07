@@ -1,7 +1,8 @@
 {
   "appTitle": "UMA",
   "apiUrl":"https://localhost:44380/api/",
-  "defaultLanguage": "fr",
+  "defaultLanguage": "fra",
+  "neutralLanguage": "und",
   "apiEndpoints":[
     { "service":"authenticate", "endpoint":"authentication/authenticate", "type":"post" },
     { "service":"register", "endpoint":"authentication/register", "type":"post" },
@@ -19,6 +20,9 @@
     { "service":"updateRole", "endpoint":"role/UpdateRole", "type":"post" },
     { "service":"deleteRole", "endpoint":"role/DeleteRole", "type":"post" },
 
+    { "service":"getProfile", "endpoint":"profile/GetProfile", "type":"post" },
+    { "service":"updateProfile", "endpoint":"profile/UpdateProfile", "type":"post" },
+
     { "service":"setRoles", "endpoint":"identityrole/SetRoles", "type":"post" }
   ],
   "policies":[
@@ -26,7 +30,7 @@
   ],
   "notification":{
     "defaultShowTimeout": 3000,
-    "defaultWarnTimeout": 4000,
+    "defaultWarnTimeout": 5000,
     "defaultSuccessTimeout": 3000,
     "defaultErrorTimeout": 5000,
     "defaultInfoTimeout": 4000
@@ -34,5 +38,6 @@
   "navBarMenu":[
     { "name":"Home", "route":"/home" },
     { "name":"Admin", "route":"/admin/dashboard", "policies": ["Admin"] }
-  ]
+  ],
+  "notificationLevel": 0
 }

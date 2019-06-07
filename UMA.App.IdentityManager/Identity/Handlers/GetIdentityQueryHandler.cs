@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using UMA.App.Common.Utility;
 using UMA.App.IdentityManager.Identity.Models;
 using UMA.App.IdentityManager.Identity.Queries;
 using UMA.Persistence.Identity.Context;
@@ -22,9 +23,7 @@ namespace UMA.App.IdentityManager.Identity.Handlers
 
             try
             {
-                var result = await _context.Identities
-                    .Include(x => x.IdentityRoles).ThenInclude(x => x.Role)
-                    .ToListAsync().ContinueWith(l => l.Result.FirstOrDefault(x => x.Id == request.Id || x.Login == request.Login));
+                var result = await _context.Identities.FirstOrDefaultAsync(x => x.Id == request.Id || x.Login.SameAs(request.Login));
 
                 if (result == null)
                 {

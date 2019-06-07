@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from '../../../_services/authentication/authentication.service';
 import { SessionService } from 'src/app/_services/_base/session/session.service';
 import { NotificationService } from 'src/app/_services/_base/notification/notification.service';
 
@@ -18,7 +16,6 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService,
         private sessionService: SessionService,
         private notifications: NotificationService
     ) {
@@ -50,12 +47,13 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login({ login: this.f.username.value, password: this.f.password.value})
-            .pipe(first())
+        this.sessionService.login({ login: this.f.username.value, password: this.f.password.value})
             .subscribe(
                 data => {
                   if (this.sessionService.isAuthentified) {
-                    this.notifications.success('Welcome back ' + this.f.username.value + '!', 'Login :');
+                    this.notifications.success('Welcome back ' + data.username + '!', 'Login :');
+                    // welcomed = true;
+
                     this.router.navigate([this.returnUrl]);
                   } else {
                     this.loading = false;
@@ -64,6 +62,7 @@ export class LoginComponent implements OnInit {
                 },
                 error => {
                     this.loading = false;
+                    this.notifications.error(error, 'Login :');
                 });
     }
 }

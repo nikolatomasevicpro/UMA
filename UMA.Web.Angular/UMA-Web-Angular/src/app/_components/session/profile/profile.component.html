@@ -5,13 +5,13 @@
       <h2>{{user.username | uppercase}} Details</h2>
       <div class="form-group">
         <label [appGlobal]="'Profile_Login'">Login :</label>
-        <input [(ngModel)]="user.username" placeholder="name" class="form-control"/>
+        <input [(ngModel)]="username" placeholder="name" class="form-control" (blur)="updateUsername($event)"/>
       </div>
       <div class="form-group">
         <label [appGlobal]="'Profile_Language'">Language</label>
-        <select class="form-control" (change)="changeLanguage($event)">
-            <option value="" disabled>Choose your language</option>
-            <option *ngFor="let language of languages" [ngValue]="user.language">{{language}}</option>
+        <select class="form-control" (ngModelChange)="changeLanguage($event)" [ngModel]="culture">
+            <option [ngValue]="null" disabled>Choose your language</option>
+            <option *ngFor="let lang of languages" [ngValue]="lang">{{lang.nativeName}}</option>
             </select>
       </div>
       <button (click)="save()" class="btn btn-primary">save</button>

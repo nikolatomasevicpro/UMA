@@ -21,33 +21,6 @@ export class QueryService {
     private notification: NotificationService
     ) { }
 
-  send<T>(service: string, body: any): Observable<T> {
-    const endPoint = this.config.getApiEndpointForService(service);
-
-    if (endPoint) {
-      switch (endPoint.type) {
-        case 'get':
-          return this.http.get<T>(this.config.config.apiUrl + endPoint.endpoint).pipe(
-            catchError(this.handleError<T>(endPoint.endpoint, null))
-            );
-        case 'post':
-          return this.http.post<T>(this.config.config.apiUrl + endPoint.endpoint, body, httpOptions).pipe(
-            catchError(this.handleError<T>(endPoint.endpoint, null))
-            );
-        case 'put':
-          return this.http.put<T>(this.config.config.apiUrl + endPoint.endpoint, body, httpOptions).pipe(
-            catchError(this.handleError<T>(endPoint.endpoint, null))
-            );
-        case 'delete':
-          return this.http.delete<T>(this.config.config.apiUrl + endPoint.endpoint, httpOptions).pipe(
-            catchError(this.handleError<T>(endPoint.endpoint, null))
-            );
-        default:
-          break;
-      }
-    }
-  }
-
   typedSend<T>(service: string, query: IRequest<T>): Observable<T> {
     const endPoint = this.config.getApiEndpointForService(service);
 

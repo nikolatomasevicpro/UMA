@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using System.Reflection;
+﻿using System.Reflection;
 using UMA.App.Common.AutoMapper;
 
 namespace UMA.App.IdentityManager
 {
-    public class IdentityManagerReferencer : Profile
+    public class IdentityManagerReferencer : AutoMapper.Profile
     {
         public IdentityManagerReferencer()
         {
